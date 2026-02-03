@@ -86,7 +86,7 @@ class CardioExercise(Exercise):
             float: Estimated calories burned
         """
         # TODO: Implement the formula
-        self.formula = distance * 100
+        self.formula = self.distance * 100
     
     def get_duration(self) -> float:
         """Get the duration of the cardio exercise.
@@ -95,11 +95,10 @@ class CardioExercise(Exercise):
             float: Duration in minutes
         """
         # TODO: Return the duration attribute
-        self.duration  = duration 
+        return self.duration
     
     def __str__(self) -> str:
         """Return detailed string representation."""
         # TODO: Return something like "Running (3.5 miles, 30 min): 350 calories"
         # Include self.name, self.distance, self.duration, and self.calculate_calories()
         print(f"{self.name}{self.distance},{self.duration}:{self.calculate_calories}")
-        
