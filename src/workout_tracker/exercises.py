@@ -21,7 +21,7 @@ class Exercise:
         # TODO: Set self.name
         # TODO: Set self.date (use datetime.now().strftime("%Y-%m-%d") if date is None)
         self.name = name
-        self.date = datetime.now().strftime("%Y-%m-%d")
+        self.date = date if date is not None else datetime.now().strftime("%Y-%m-%d")
     
     def calculate_calories(self) -> float:
         """Calculate calories burned for this exercise.
@@ -72,8 +72,7 @@ class CardioExercise(Exercise):
             duration: Time spent in minutes
             date: Date performed (optional)
         """
-        super().__init__()
-        self.name = name
+        super().__init__(name, date)
         self.distance = distance
         self.duration = duration
     
@@ -87,6 +86,7 @@ class CardioExercise(Exercise):
         """
         # TODO: Implement the formula
         self.formula = self.distance * 100
+        return self.formula
     
     def get_duration(self) -> float:
         """Get the duration of the cardio exercise.
@@ -101,4 +101,4 @@ class CardioExercise(Exercise):
         """Return detailed string representation."""
         # TODO: Return something like "Running (3.5 miles, 30 min): 350 calories"
         # Include self.name, self.distance, self.duration, and self.calculate_calories()
-        print(f"{self.name}{self.distance},{self.duration}:{self.calculate_calories}")
+        return f"{self.name} ({self.distance} miles, {self.duration} min): {self.calculate_calories()} calories"
