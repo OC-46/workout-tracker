@@ -102,3 +102,44 @@ class CardioExercise(Exercise):
         # TODO: Return something like "Running (3.5 miles, 30 min): 350 calories"
         # Include self.name, self.distance, self.duration, and self.calculate_calories()
         return f"{self.name} ({self.distance} miles, {self.duration} min): {self.calculate_calories()} calories"
+
+
+class StrengthExercise(Exercise):
+    """Strength exercise with weight, reps, and sets tracking.
+    
+    Attributes:
+        name (str): Exercise name
+        date (str): Date performed
+        weight (float): Weight lifted in pounds
+        reps (int): Repetitions per set
+        sets (int): Number of sets
+    """
+    
+    def __init__(self, name: str, weight: float, reps: int, sets: int, date: str = None):
+        """Initialize a StrengthExercise.
+        
+        Args:
+            name: Exercise name (e.g., "Bench Press", "Squats")
+            weight: Weight lifted in pounds
+            reps: Repetitions per set
+            sets: Number of sets
+            date: Date performed (optional)
+        """
+        super().__init__(name, date)
+        self.weight = weight
+        self.reps = reps
+        self.sets = sets
+    
+    def calculate_calories(self) -> float:
+        """Calculate calories burned based on weight, reps, and sets.
+        
+        Formula: (weight * reps * sets) / 500
+        
+        Returns:
+            float: Estimated calories burned
+        """
+        return (self.weight * self.reps * self.sets) * 0.05
+
+    def __str__(self):
+        return f"{self.name} ({self.weight} lbs, {self.reps} reps x {self.sets} sets): {self.calculate_calories()} calories"
+    
