@@ -139,6 +139,16 @@ class StrengthExercise(Exercise):
             float: Estimated calories burned
         """
         return (self.weight * self.reps * self.sets) * 0.05
+    
+    def get_duration(self) -> float:
+        """Get the duration of the strength exercise.
+        
+        Duration is estimated at 3 minutes per set.
+        
+        Returns:
+            float: Duration in minutes
+        """
+        return self.sets * 3
 
     def __str__(self):
         return f"{self.name} ({self.weight} lbs, {self.reps} reps x {self.sets} sets): {self.calculate_calories()} calories"
@@ -162,10 +172,20 @@ class FlexibilityExercise(Exercise):
             duration: Time spent in minutes
             intensity: Intensity level ("low", "medium", "high")
             date: Date performed (optional)
+            
+        Raises:
+            ValueError: If intensity is not one of "low", "medium", "high"
         """
         super().__init__(name, date)
         self.duration = duration
-        self.intensity = intensity.lower()
+        
+        # Validate and normalize intensity
+        valid_intensities = {"low", "medium", "high"}
+        intensity_lower = intensity.lower()
+        if intensity_lower not in valid_intensities:
+            raise ValueError(f"Intensity must be one of {valid_intensities}, got '{intensity}'")
+        
+        self.intensity = intensity_lower
     
     def calculate_calories(self) -> float:
         """Calculate calories burned based on duration and intensity.
@@ -197,3 +217,5 @@ class FlexibilityExercise(Exercise):
     def __str__(self) -> str:
         """Return detailed string representation."""
         return f"{self.name} ({self.duration} min, {self.intensity} intensity): {self.calculate_calories()} calories"
+    
+
