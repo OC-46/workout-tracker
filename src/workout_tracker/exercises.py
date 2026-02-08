@@ -143,3 +143,57 @@ class StrengthExercise(Exercise):
     def __str__(self):
         return f"{self.name} ({self.weight} lbs, {self.reps} reps x {self.sets} sets): {self.calculate_calories()} calories"
     
+
+class FlexibilityExercise(Exercise):
+    """Flexibility exercise with duration and intensity tracking.
+    
+    Attributes:
+        name (str): Exercise name
+        date (str): Date performed
+        duration (float): Time spent in minutes
+        intensity (str): Intensity level ("low", "medium", "high")
+    """
+    
+    def __init__(self, name: str, duration: float, intensity: str = "medium", date: str = None):
+        """Initialize a FlexibilityExercise.
+        
+        Args:
+            name: Exercise name (e.g., "Yoga", "Stretching")
+            duration: Time spent in minutes
+            intensity: Intensity level ("low", "medium", "high")
+            date: Date performed (optional)
+        """
+        super().__init__(name, date)
+        self.duration = duration
+        self.intensity = intensity.lower()
+    
+    def calculate_calories(self) -> float:
+        """Calculate calories burned based on duration and intensity.
+        
+        Intensity multipliers:
+            low: 1 calories/min
+            medium: 1.5 calories/min
+            high: 2 calories/min
+        
+        Returns:
+            float: Estimated calories burned
+        """
+        intensity_map = {
+            "low": 1.0,
+            "medium": 1.5,
+            "high": 2
+        }
+        multiplier = intensity_map.get(self.intensity, 1.0)  # Default to low if unknown
+        return self.duration * 2.5 * multiplier
+    
+    def get_duration(self) -> float:
+        """Get the duration of the flexibility exercise.
+        
+        Returns:
+            float: Duration in minutes
+        """
+        return self.duration
+    
+    def __str__(self) -> str:
+        """Return detailed string representation."""
+        return f"{self.name} ({self.duration} min, {self.intensity} intensity): {self.calculate_calories()} calories"
