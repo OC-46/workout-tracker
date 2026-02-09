@@ -89,11 +89,7 @@ class CardioExercise(Exercise):
         return self.formula
     
     def get_duration(self) -> float:
-        """Get the duration of the cardio exercise.
-        
-        Returns:
-            float: Duration in minutes
-        """
+        #Get the duration of the cardio exercise
         # TODO: Return the duration attribute
         return self.duration
     
@@ -131,23 +127,11 @@ class StrengthExercise(Exercise):
         self.sets = sets
     
     def calculate_calories(self) -> float:
-        """Calculate calories burned based on weight, reps, and sets.
-        
-        Formula: (weight * reps * sets) / 500
-        
-        Returns:
-            float: Estimated calories burned
-        """
+        #Calculate calories burned based on weight, reps, and sets
         return (self.weight * self.reps * self.sets) * 0.05
     
     def get_duration(self) -> float:
-        """Get the duration of the strength exercise.
-        
-        Duration is estimated at 3 minutes per set.
-        
-        Returns:
-            float: Duration in minutes
-        """
+        #Get the duration of the strength exercise
         return self.sets * 3
 
     def __str__(self):
@@ -188,16 +172,7 @@ class FlexibilityExercise(Exercise):
         self.intensity = intensity_lower
     
     def calculate_calories(self) -> float:
-        """Calculate calories burned based on duration and intensity.
-        
-        Intensity multipliers:
-            low: 1 calories/min
-            medium: 1.5 calories/min
-            high: 2 calories/min
-        
-        Returns:
-            float: Estimated calories burned
-        """
+        #Calculate calories burned based on duration and intensity
         intensity_map = {
             "low": 1.0,
             "medium": 1.5,
@@ -207,11 +182,7 @@ class FlexibilityExercise(Exercise):
         return self.duration * 2.5 * multiplier
     
     def get_duration(self) -> float:
-        """Get the duration of the flexibility exercise.
-        
-        Returns:
-            float: Duration in minutes
-        """
+        #Get the duration of the flexibility exercise.
         return self.duration
     
     def __str__(self) -> str:
